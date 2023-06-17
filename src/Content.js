@@ -4,8 +4,8 @@ import { FiTrash2 } from "react-icons/fi";
 function Content(props) {
   const todo = props.todo;
 
-  const handleDeleteItem = (id) => {
-    props.handleDeleteItem(id);
+  const handleDeleteItem = (id,item) => {
+    props.handleDeleteItem(id,item);
   };
 
 const handleCheck=(id)=>{
@@ -37,7 +37,7 @@ return (
             </div>
             <button
               className="delete-button"
-              onClick={() => handleDeleteItem(item.id)}
+              onClick={() => handleDeleteItem(item.id,item)}
             >
               <FiTrash2 className="trash-icon" />
             </button>

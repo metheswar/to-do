@@ -26,6 +26,10 @@ function App() {
 
   const handleAddItem = () => {
     if (inputValue.trim() !== "") {
+      toast.success(`Congratulations! You added task ${inputValue}!`, {
+        position: toast.POSITION.TOP_RIGHT,
+        className: "toast-success"
+      });
       const newItem = {
         id: todo.length > 0 ? todo[todo.length - 1].id + 1 : 1,
         item: inputValue.trim(),
@@ -36,7 +40,11 @@ function App() {
     }
   };
 
-  const handleDeleteItem = (id) => {
+  const handleDeleteItem = (id,item) => {
+    toast.error(`You deleted task ${item.item}!`, {
+      position: toast.POSITION.TOP_RIGHT,
+      className: "toast-error",
+    });
     const updatedTodo = todo.filter((item) => item.id !== id);
     setTodo(updatedTodo);
     localStorage.setItem("todo", JSON.stringify(updatedTodo));
@@ -46,12 +54,12 @@ function App() {
     const updatedTodo = todo.map((item) => {
       if (item.id === id) {
         if (!item.checked) {
-          toast.success("Congratulations! You completed a task!", {
+          toast.success(`Congratulations! You have completed task ${item.item}! `, {
             position: toast.POSITION.TOP_RIGHT,
             className: "toast-success"
           });
         } else {
-          toast.error("You unchecked a task.", {
+          toast.error(`You have unchecked task ${item.item}!`, {
             position: toast.POSITION.TOP_RIGHT,
             className: "toast-error",
           });
