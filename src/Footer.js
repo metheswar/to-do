@@ -3,7 +3,7 @@ export default function Footer(props) {
 
   return (
     <div className="footer">
-      <p>you have {props.length} works</p>
+      <p>&copy; {currentYear}</p>
     </div>
   );
 }
