@@ -1,8 +1,14 @@
 /* styles.css */
+@import url('https://fonts.googleapis.com/css2?family=Mukta:wght@200&family=Open+Sans:ital,wght@1,300&display=swap');
+
+/* Rest of your CSS code goes here */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Mukta', sans-serif;
+  font-family: 'Open Sans', sans-serif;
  
 }
 
@@ -38,13 +44,79 @@
 }
 
 .todo-item-container {
-  background-color: #DDDDDD; /* Sunflower */
+  background-color: #dddddd; /* Sunflower */
   padding: 10px;
   border-radius: 5px;
   display: flex;
   align-items: center;
   margin-bottom: 10px;
 }
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  margin-right: 10px; /* Adjust the spacing between the checkbox and the span */
+}
+
+.checkbox {
+  /* Hide the default checkbox appearance */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  /* Define the size and styles of the custom checkbox */
+  width: 20px;
+  height: 20px;
+  border: 2px solid #555;
+  border-radius: 4px;
+  background-color: transparent;
+  margin-right: 5px;
+  cursor: pointer;
+  position: relative;
+}
+
+/* Customize the tick mark */
+.checkbox::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  background-color: #24a0ed;
+ ;
+  opacity: 0;
+}
+
+
+
+/* Customize the checkbox appearance when checked */
+.checkbox:checked::after {
+  opacity: 1;
+}
+
+/* Hide the tick mark when the checkbox is not checked */
+.checkbox:not(:checked)::after {
+  display: none;
+}
+
+
+/* Customize the checkbox appearance when checked */
+
+
+.todo-item-container input[type="checkbox"] {
+  margin-right: 10px; /* Adjust the spacing between the checkbox and the span */
+}
+
+/* Rest of your styles */
+.todo-item-container span {
+  font-size: xx-large;
+  font-family: 'Mukta', sans-serif;
+  font-family: 'Open Sans', sans-serif;
+  /* Add any other desired styles */
+}
+
 
 .todo-item-container {
   /* Other styles */

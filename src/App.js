@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Content from "./Content";
 import Header from "./Header";
 import Input from "./Input";
@@ -25,8 +27,9 @@ function App() {
   const handleAddItem = () => {
     if (inputValue.trim() !== "") {
       const newItem = {
-        id: todo.length > 0 ? todo[todo.length - 1].id + 1 : 1, // Generate a unique ID based on the last item's ID or start with 1 if the list is empty
+        id: todo.length > 0 ? todo[todo.length - 1].id + 1 : 1,
         item: inputValue.trim(),
+        checked: false,
       };
       setTodo([...todo, newItem]);
       setInputValue("");
@@ -38,7 +41,28 @@ function App() {
     setTodo(updatedTodo);
     localStorage.setItem("todo", JSON.stringify(updatedTodo));
   };
-  
+
+  const handleCheck = (id) => {
+    const updatedTodo = todo.map((item) => {
+      if (item.id === id) {
+        if (!item.checked) {
+          toast.success("Congratulations! You completed a task!", {
+            position: toast.POSITION.TOP_RIGHT,
+            className: "toast-success"
+          });
+        } else {
+          toast.error("You unchecked a task.", {
+            position: toast.POSITION.TOP_RIGHT,
+            className: "toast-error",
+          });
+        }
+        return { ...item, checked: !item.checked };
+      }
+      return item;
+    });
+    setTodo(updatedTodo);
+    localStorage.setItem("todo", JSON.stringify(updatedTodo));
+  };
 
   return (
     <div className="App">
@@ -48,9 +72,23 @@ function App() {
         setInputValue={setInputValue}
         handleAddItem={handleAddItem}
       />
-      <Content todo={todo} handleDeleteItem={handleDeleteItem} />
-      <Footer
-      length={todo.length}
+      <Content
+        todo={todo}
+        handleDeleteItem={handleDeleteItem}
+        handleCheck={handleCheck}
+      />
+      <Footer length={todo.length} />
+      <ToastContainer
+        position="top-right"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick
+        rtl={false}
+        
+        draggable
+       
+        toastClassName="toast-container"
       />
     </div>
   );
